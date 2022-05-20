@@ -29,13 +29,16 @@ export class AppComponent {
 
   time =
     this.today.getDate() +
-    ' ' +
+    '_' +
     this.month +
-    ' ' +
+    '_' +
     this.today.getHours() +
     ':' +
     this.today.getMinutes();
-  fileName = this.time + '.xlsx';
+
+  time2 = Math.floor(this.today.getTime() / 1000);
+
+  fileName = this.time2 + '.xlsx';
   userList = [
     {
       id: 1,
