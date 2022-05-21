@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import * as XLSX from 'xlsx';
+import jspdf from 'jspdf';
+
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +42,7 @@ export class AppComponent {
   time2 = Math.floor(this.today.getTime() / 1000);
 
   fileName = this.time2 + '.xlsx';
+  pdfName = this.time2 + '.pdf';
   userList = [
     {
       id: 1,
@@ -80,5 +84,20 @@ export class AppComponent {
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  @ViewChild('content') content!: ElementRef;
+
+  public openPDF(): void {
+    let DATA: any = document.getElementById('content');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 200;
+      let fileHeight = 150;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jspdf('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save(this.pdfName);
+    });
   }
 }

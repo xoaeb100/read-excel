@@ -1,25 +1,39 @@
 <div style=" margin: auto; width: 50%; padding-top: 50px;">
+  <div  id="content" #content>
 
-  <table id="excel-table">
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Username</th>
-      <th>Email</th>
-    </tr>
-    <tr *ngFor="let item of userList">
-      <td>{{item.id}}</td>
-      <td>{{item.name}}</td>
-      <td>{{item.username}}</td>
-      <td>{{item.email}}</td>
-    </tr>
-  </table>
-  <br>
-  <br>
-  <button type="button" class="btn btn-primary" (click)="exportexcel()">Download as Excel</button>
-  <br>
-  <br>
-  <h2>File will be saved as</h2>
-  <h3> {{time2}} </h3>
+    <table class="table table-striped" id="excel-table">
+      <thead>
 
+
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of userList">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.username}}</td>
+          <td>{{item.email}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <button type="button" class="btn btn-primary" (click)="exportexcel()">Download as Excel</button>
+    <br>
+    <br>
+    <div class="col-md-4 text-right">
+      <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+    </div>
+    <br>
+    <br>
+    <h2>File will be saved as</h2>
+    <h3> {{time2}} </h3>
+
+  </div>
 </div>
